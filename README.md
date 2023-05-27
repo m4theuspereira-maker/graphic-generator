@@ -76,8 +76,8 @@ $ docker run template-template
 
 
 ## Project folders schema
-
 ```
+graphic-generator
 ├─ .circleci
 │  └─ config.yml
 ├─ .dockerignore
@@ -93,14 +93,20 @@ $ docker run template-template
 ├─ nodemon.json
 ├─ package.json
 ├─ src
-│  ├─ config
+│  ├─ common
 │  │  └─ environment-consts.ts
+│  └─ services
+│     ├─ graphic-generator-service.ts
+│     ├─ interfaces
+│     │  └─ interfaces.ts
+│     └─ ws-server.ts
 │  ├─ index.ts
-│  └─ routes.ts
 ├─ tests
-│  └─ example.spec.ts
+│  ├─ graphic-generator-service.spec.ts
+│  └─ ws-server.spec.ts
 ├─ tsconfig-build.json
 ├─ tsconfig.json
 ├─ yarn-error.log
 └─ yarn.lock
+
 ```
