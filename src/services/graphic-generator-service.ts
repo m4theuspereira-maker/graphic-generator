@@ -1,6 +1,4 @@
 export class GraphicGeneratorService {
-  constructor(private readonly server: any) {}
-
   calculate(x: number): number {
     const y =
       -0.06366 +
@@ -12,10 +10,10 @@ export class GraphicGeneratorService {
     return y;
   }
 
-  gerateResult(callbackEvent: string) {
+  gerateResult(socket: any, callbackEvent: string) {
     console.log("New client connected! ✅");
 
-    this.server.on(callbackEvent, (message: number) => {
+    socket.on(callbackEvent, (message: number) => {
       let incremmentMessage = Number(message);
 
       setInterval(() => {
@@ -28,7 +26,7 @@ export class GraphicGeneratorService {
 
         incremmentMessage = incremmentMessage + 100;
 
-        this.server.send(JSON.stringify(result));
+        socket.send(JSON.stringify(result));
       }, 3000);
     });
   }

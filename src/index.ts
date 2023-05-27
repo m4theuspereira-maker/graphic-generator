@@ -6,5 +6,5 @@ const server = new WSServer();
 
 server.start(Number(PORT), HOST);
 server.handle(EVENTS.CONNECTION, (ws) => {
-  new GraphicGeneratorService(ws).gerateResult(EVENTS.MESSAGE);
+  new GraphicGeneratorService().gerateResult(ws, EVENTS.MESSAGE);
 });
