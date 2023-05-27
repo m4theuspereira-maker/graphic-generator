@@ -1,8 +1,8 @@
 version: "3.7"
 
 services:
-  template:
-    container_name: template
+  graphic_generator:
+    container_name: graphic_generator
     build:
       context: ./
       dockerfile: ./Dockerfile
@@ -14,7 +14,7 @@ services:
     volumes:
       - "./:/app"
     networks:
-      - template_network
+      - graphic_generator_network
 
 networks:
-  template_network:
+  graphic_generator_network:
