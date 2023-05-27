@@ -1,6 +1,5 @@
 import { Server } from "ws";
 import { IServer } from "./interfaces/interfaces";
-import { EVENTS } from "../common/environment-consts";
 
 export class WSServer implements IServer {
   instance: Server | undefined;
