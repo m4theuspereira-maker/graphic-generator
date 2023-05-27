@@ -1,13 +1,6 @@
 ## Description
-
-That's a simple solution to start APIs in nodejs if you don't want to download all dependencies every time when you start some new project.
-
-You can implement any architecture on this template and it already comes with prettier, jest, eslint, docker and suport for circleci if you wanna implement CI/CD in that platform.
-
-## Basics
-
-The template comes by default with some basic commands, for example:
-
+This application return in real time indexes to a graphic that can be ploted by any frontend client
+## Basic scripts
 ### To build project and add husky configuration
 
 (to know more about husky: https://typicode.github.io/husky/#/)
@@ -65,16 +58,6 @@ $ docker-compose up
 ```
 To build a container and then start automatically
 
-```
-$ docker-compose build
-```
-To build a container with dockerfile configs, you can start manually with the command
-
-```
-$ docker run template-template
-```
-
-
 ## Project folders schema
 ```
 graphic-generator
@@ -108,5 +91,35 @@ graphic-generator
 ├─ tsconfig.json
 ├─ yarn-error.log
 └─ yarn.lock
-
 ```
+
+## Basic Usage
+
+To use in dev environment just run this command
+```
+$ yarn dev
+```
+
+Then, use some request client as Insomnia, Postman or any you prefer. In this exemple i used insomnia.
+In your client, create a new websocket request and put the port and url setted up in your project copy
+
+![plot](./assets/insomnia_connected.png)
+
+Now click in connect and a message of success will be returned down bellow
+
+![plot](./assets/insomnia.png)
+
+With the client properly connect, you can send the message and the application will return the indexes
+
+![plot](./assets/ready_to_send_message.png)
+
+![plot](./assets/return_received.png)
+
+
+
+
+
+
+
+
+

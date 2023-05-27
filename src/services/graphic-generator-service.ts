@@ -13,7 +13,12 @@ export class GraphicGeneratorService {
   gerateResult(socket: any, callbackEvent: string) {
     console.log("New client connected! ✅");
 
-    socket.on(callbackEvent, (message: number) => {
+    socket.on(callbackEvent, (message: any) => {
+      if (message !== typeof "number") {
+        socket.send("INCORRECT_TYPE: send a number in message body");
+        return;
+      }
+
       let incremmentMessage = Number(message);
 
       setInterval(() => {
