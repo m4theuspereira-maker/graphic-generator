@@ -1,16 +1,10 @@
-import express from "express";
-import cors from "cors";
-import { PORT } from "./common/environment-consts";
-import { routes } from "./routes";
+import { EVENTS, HOST, PORT } from "./common/environment-consts";
+import { WSServer } from "./services/ws-server";
+import { GraphicGeneratorService } from "./services/graphic-generator-service";
 
-const app = express();
-app.use(cors());
-app.use(routes);
+const server = new WSServer();
 
-const server = app.listen(PORT, () => {
-  app.use(express.json());
-  app.use(express.urlencoded({ extended: true }));
-  console.log(`listening on port ${PORT} 🚀`);
+server.start(Number(PORT), HOST);
+server.handle(EVENTS.CONNECTION, (ws) => {
+  new GraphicGeneratorService(ws).gerateResult(EVENTS.MESSAGE);
 });
-
-export { server };
