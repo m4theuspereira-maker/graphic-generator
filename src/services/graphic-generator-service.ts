@@ -16,34 +16,38 @@ export class GraphicGeneratorService {
     console.log("New client connected! ✅");
 
     socket.on(callbackEvent, (message: any) => {
-      if (
-        String(message).toLocaleLowerCase().trim() !== EVENTS.CLOSE &&
-        typeof JSON.parse(message) !== "number"
-      ) {
-        socket.send("INCORRECT_TYPE: send a number in message body");
-        return;
-      }
-
-      let incremmentMessage = message;
-
-      const interval = setInterval(() => {
+      try {
         if (
-          String(incremmentMessage).toLocaleLowerCase().trim() == EVENTS.CLOSE
+          String(message).toLocaleLowerCase().trim() !== EVENTS.CLOSE &&
+          typeof JSON.parse(message) !== "number"
         ) {
-          socket.send("Connection closed! ❌");
-          socket.close();
-          clearInterval(interval);
+          socket.send("INCORRECT_TYPE: send a number in message body");
+          return;
         }
 
-        const result = {
-          x: String(incremmentMessage),
-          y: String(this.calculate(incremmentMessage))
-        };
+        let incremmentMessage = message;
 
-        incremmentMessage = Number(incremmentMessage) + 100;
+        const interval = setInterval(() => {
+          if (
+            String(incremmentMessage).toLocaleLowerCase().trim() == EVENTS.CLOSE
+          ) {
+            socket.send("Connection closed! ❌");
+            socket.close();
+            clearInterval(interval);
+          }
 
-        socket.send(JSON.stringify(result));
-      }, 3000);
+          const result = {
+            x: String(incremmentMessage),
+            y: String(this.calculate(incremmentMessage))
+          };
+
+          incremmentMessage = Number(incremmentMessage) + 100;
+
+          socket.send(JSON.stringify(result));
+        }, 3000);
+      } catch (error) {
+        socket.send("INCORRECT_TYPE: send a number in message body");
+      }
     });
   }
 }
