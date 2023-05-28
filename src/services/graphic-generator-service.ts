@@ -1,4 +1,3 @@
-import { on } from "ws";
 import { EVENTS } from "../common/environment-consts";
 
 export class GraphicGeneratorService {
