@@ -8,5 +8,6 @@ export const HOST = String(process.env.HOST) || "127.0.0.1";
 export const EVENTS = {
   LISTENING: "listening",
   CONNECTION: "connection",
-  MESSAGE: "message"
+  MESSAGE: "message",
+  CLOSE: "close"
 };

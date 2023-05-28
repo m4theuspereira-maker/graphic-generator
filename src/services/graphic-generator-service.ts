@@ -1,3 +1,6 @@
+import { on } from "ws";
+import { EVENTS } from "../common/environment-consts";
+
 export class GraphicGeneratorService {
   calculate(x: number): number {
     const y =
@@ -14,14 +17,25 @@ export class GraphicGeneratorService {
     console.log("New client connected! ✅");
 
     socket.on(callbackEvent, (message: any) => {
-      if (message !== typeof "number") {
+      if (
+        String(message).toLocaleLowerCase().trim() !== EVENTS.CLOSE &&
+        typeof message !== "number"
+      ) {
         socket.send("INCORRECT_TYPE: send a number in message body");
         return;
       }
 
-      let incremmentMessage = Number(message);
+      let incremmentMessage = message;
 
-      setInterval(() => {
+      const interval = setInterval(() => {
+        if (String(incremmentMessage).toLocaleLowerCase().trim() == EVENTS.CLOSE) {
+          socket.send("Connection closed! ❌");
+          socket.close();
+          clearInterval(interval);
+        }
+
+        incremmentMessage = Number(message);
+
         this.calculate(incremmentMessage);
 
         const result = {
@@ -33,6 +47,8 @@ export class GraphicGeneratorService {
 
         socket.send(JSON.stringify(result));
       }, 3000);
+
+      return interval;
     });
   }
 }

@@ -115,6 +115,9 @@ With the client properly connect, you can send the message and the application w
 
 ![plot](./assets/return_received.png)
 
+If you wanna stop the process or close connection, just send "close" in body message and the connection will be ended
+![plot](./assets/connection_closed.PNG)
+
 
 
 
