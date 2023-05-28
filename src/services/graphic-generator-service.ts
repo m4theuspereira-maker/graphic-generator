@@ -35,8 +35,6 @@ export class GraphicGeneratorService {
 
         incremmentMessage = Number(message);
 
-        this.calculate(incremmentMessage);
-
         const result = {
           x: String(incremmentMessage),
           y: String(this.calculate(incremmentMessage))
