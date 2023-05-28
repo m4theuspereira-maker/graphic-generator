@@ -46,8 +46,6 @@ export class GraphicGeneratorService {
 
         socket.send(JSON.stringify(result));
       }, 3000);
-
-      return interval;
     });
   }
 }
