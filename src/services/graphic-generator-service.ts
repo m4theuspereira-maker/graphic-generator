@@ -18,7 +18,7 @@ export class GraphicGeneratorService {
     socket.on(callbackEvent, (message: any) => {
       if (
         String(message).toLocaleLowerCase().trim() !== EVENTS.CLOSE &&
-        typeof message !== "number"
+        typeof JSON.parse(message) !== "number"
       ) {
         socket.send("INCORRECT_TYPE: send a number in message body");
         return;
