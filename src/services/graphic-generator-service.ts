@@ -27,20 +27,20 @@ export class GraphicGeneratorService {
       let incremmentMessage = message;
 
       const interval = setInterval(() => {
-        if (String(incremmentMessage).toLocaleLowerCase().trim() == EVENTS.CLOSE) {
+        if (
+          String(incremmentMessage).toLocaleLowerCase().trim() == EVENTS.CLOSE
+        ) {
           socket.send("Connection closed! ❌");
           socket.close();
           clearInterval(interval);
         }
-
-        incremmentMessage = Number(message);
 
         const result = {
           x: String(incremmentMessage),
           y: String(this.calculate(incremmentMessage))
         };
 
-        incremmentMessage = incremmentMessage + 100;
+        incremmentMessage = Number(incremmentMessage) + 100;
 
         socket.send(JSON.stringify(result));
       }, 3000);
